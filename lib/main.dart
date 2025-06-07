@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Timeline de Personagens HP',
+      title: 'Timeline de Personagens',
       theme: ThemeData(primarySwatch: Colors.brown),
       // home: const MainScreen(), // Remova a definição direta do home
       initialRoute: '/', // Rota inicial
