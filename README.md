@@ -42,7 +42,12 @@ Outras fontes: 🔗 [harrypotter.com](https://www.harrypotter.com/) 🔗 [harryp
 ## 🎨 **Paleta de Cores (app_colors.dart)**
 
 Para garantir uma identidade visual coesa e imersiva no universo de Harry Potter, o aplicativo utiliza `app_colors.dart`.
-> **As cores foram cuidadosamente selecionadas para evocar a atmosfera mágica da saga, com a paleta principal inspirada nos tons azul e bronze da casa Corvinal.**
-> O arquivo centraliza todas as cores personalizadas do projeto, facilitando a padronização e eventuais alterações futuras.
+* **As cores foram cuidadosamente selecionadas para evocar a atmosfera mágica da saga, com a paleta principal inspirada nos tons azul e bronze da casa Corvinal.** <br>
+* O arquivo centraliza todas as cores personalizadas do projeto, facilitando a padronização e eventuais alterações futuras.
+<br>
 
-## 💙 Feito com magia por um corvino orgulhoso.
+## 💙
+>
+> [!NOTE]
+> Este projeto foi desenvolvido com carinho por um bruxo da **casa Corvinal**, e carrega sua essência: inteligência, criatividade e amor por aprender.
+
