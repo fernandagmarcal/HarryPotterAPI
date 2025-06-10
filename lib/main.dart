@@ -1,7 +1,7 @@
+// main.dart
+
 import 'package:flutter/material.dart';
-import './screens/main_screen.dart';
-import './scenes/timeline_screen/timeline_screen.dart'; // Importe a TimelineScreen
-import './scenes/post_screen/post_screen.dart';     // Importe a PostScreen
+import './routes/app_routes.dart'; // <<< Importe seu novo arquivo de rotas
 
 void main() {
   runApp(const MyApp());
@@ -13,17 +13,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Timeline de Personagens',
-      theme: ThemeData(primarySwatch: Colors.brown),
-      // home: const MainScreen(), // Remova a definição direta do home
-      initialRoute: '/', // Rota inicial
-      routes: {
-        '/': (context) => const MainScreen(), // Rota para sua tela principal atual
-        TimelineScreen.routeName: (context) => const TimelineScreen(), // Rota para a TimelineScreen
-        PostScreen.routeName: (context) => PostScreen(
-          post: ModalRoute.of(context)?.settings.arguments, // Recebe os argumentos
-        ), // Rota para a PostScreen
-      },
+      title: 'Mundo HP', // Um título mais genérico e adequado para o app
+      theme: ThemeData(primarySwatch: Colors.blue),
+      // rota inicial
+      initialRoute: AppRoutes.home,
+      // mapa de rotas
+      routes: AppRoutes.routes,
+
+      // Opcional: Se você decidir usar onGenerateRoute para lidar com passagem de argumentos
+      // ou rotas dinâmicas/não encontradas, você usaria essa propriedade.
+      // Neste caso, você comentaria a linha 'routes: AppRoutes.routes,'.
+      // onGenerateRoute: AppRoutes.onGenerateRoute,
     );
   }
 }

@@ -1,0 +1,3 @@
+class DictionaryScreen {
+  const DictionaryScreen();
+}

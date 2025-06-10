@@ -1,0 +1,3 @@
+class WandsScreen {
+  const WandsScreen();
+}

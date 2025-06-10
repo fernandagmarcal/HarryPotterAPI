@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/character.dart';
+import '../scenes/timeline_screen/timeline_screen.dart';
 import '../ui/app_colors.dart';
+import 'main_screen.dart';
 
 class SuccessScreen extends StatelessWidget {
   final List<Character> characters;
@@ -19,6 +21,25 @@ class SuccessScreen extends StatelessWidget {
         backgroundColor: AppColors.azulEscuro, // Cor de fundo da AppBar
         elevation: 4, // Sombra
         centerTitle: true, // Centraliza o título
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_rounded, color: Colors.white),
+          onPressed: () {
+            // Usar Navigator.pop(context) é geralmente melhor para voltar
+            // para a tela anterior na pilha de navegação, se MainScreen foi a anterior.
+            // Se MainScreen SEMPRE é a "raiz", pode usar Navigator.pushReplacementNamed.
+            // Mas, se você quer apenas "voltar", pop é o mais indicado.
+            Navigator.pop(context); // Volta para a tela anterior (MainScreen, se foi de lá que veio)
+
+            // OU, se você quer ter certeza de que vai para a MainScreen (home) sempre,
+            // e quer substituí-la na pilha (removendo a TimelineScreen):
+            // Navigator.pushReplacement(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => const MainScreen()),
+            // );
+            // OU, melhor ainda, se MainScreen tiver rota nomeada:
+            // Navigator.pushReplacementNamed(context, '/'); // Use a rota da sua MainScreen (Home)
+          },
+        ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -40,10 +61,19 @@ class SuccessScreen extends StatelessWidget {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const SuccessScreen(characters: [], messageTitle: '',)),
+                MaterialPageRoute(builder: (context) => const TimelineScreen()),
               );
             },
           ),
+          // IconButton(
+          //   icon: Icon(Icons.arrow_back_rounded, color: Colors.white),
+          //   onPressed: () {
+          //     Navigator.pushReplacement(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => const MainScreen()),
+          //     );
+          //   },
+          // ),
         ],
       ),
       body: characters.isEmpty
