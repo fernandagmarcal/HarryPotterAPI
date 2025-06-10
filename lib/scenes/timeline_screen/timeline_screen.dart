@@ -7,7 +7,7 @@ import '../../utils/ApiService.dart';
 
 class TimelineScreen extends StatefulWidget {
   static const routeName = '/personagens';
-  final String messageTitle = "Personagens de Harry Potter";
+  final String messageTitle = "Explorar Personagens";
   final String messageDescription = "Lista de personagens de Harry Potter";
   final String messageErrorTitle = "Erro ao carregar os personagens! Reinicie o APP...";
   final String messageErrorDescription = "Não foi possível carregar os personagens. Tente novamente mais tarde!";

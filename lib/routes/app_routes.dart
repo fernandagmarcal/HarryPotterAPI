@@ -33,8 +33,8 @@ class AppRoutes {
       success: (context) => const SuccessScreen(characters: [], messageTitle: "Sucesso!",),
       failure: (context) => const FailureScreen(message: "Ocorreu um erro."),
       history: (context) => const HistoryScreen(),
-      //dictionary: (context) => const DictionaryScreen(),
-      //wands: (context) => const WandsScreen(),
+      dictionary: (context) => const DictionaryScreen(),
+      wands: (context) => const WandsScreen(),
     };
   }
 }

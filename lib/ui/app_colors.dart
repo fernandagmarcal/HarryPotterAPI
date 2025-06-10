@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 abstract class AppColors {
-  static const Color azulEscuro = Color(0xFF0F1D4A); // Azul escuro
+  static const Color azulEscuro = Color(0xFF001B59); // Azul escuro
+  static const Color azulPrincipal = Color(0xFF06153A); // Azul escuro
+  static const Color backgroundColor = Color(0xFF1B326A); // Azul escuro
   static const Color azulMedio= Color(0xFF223164); // Azul médio/escuro
   static const Color cinzaEscuro = Color(0xFF5D5D5D); // Cinza
   static const Color marromQueimado = Color(0xFF946B2D); // Marrom/Ocre

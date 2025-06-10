@@ -47,6 +47,8 @@ class Character {
     );
   }
 
+  get id => null;
+
   @override
   String toString() {
     return "Nome: $name\nEspécie: $species\nGênero: $gender\nCasa: $house\nNascimento: $dateOfBirth\nMago: $wizard\nAncestralidade: $ancestry\nVarinha: $wand\nPatronus: $patronus\nEstudante: $hogwartsStudent\nStaff: $hogwartsStaff\nVivo: $alive\nImagem: $image\n\n";

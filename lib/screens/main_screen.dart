@@ -8,12 +8,16 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
-        title: const Text('Bem-vindo ao Mundo de Harry Potter!'),
-        centerTitle: true, // Centraliza o título
-        backgroundColor: AppColors.azulEscuro, // Adiciona cor à AppBar
-        foregroundColor: Colors.white, // Cor do texto e ícones na AppBar
-      ),
+        title: const Text('Bem-vindo ao Universo de Harry Potter!',
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: AppColors.marromClaro,),),
+        centerTitle: true,
+        backgroundColor: AppColors.azulPrincipal,
+        foregroundColor: AppColors.marromClaro,),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
@@ -22,30 +26,49 @@ class MainScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Text(
-                'Este aplicativo explora os personagens, a história e os mistérios do mundo bruxo de Harry Potter.',
+                'Prepare-se para mergulhar no mundo bruxo!\nNeste app, você encontra um resumo encantador da história de Harry Potter,\n'
+                    'um dicionário com termos mágicos e um guia completo sobre varinhas.\n'
+                    'Também pode explorar detalhes dos personagens icônicos da saga!\n \n',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 22,
                   fontStyle: FontStyle.italic,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(height: 50),
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.marromClaro,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 5.0,
+                      color: Colors.black45,
+                      offset: Offset(2.0, 2.0),),]),),
+              const Text(
+                '✨ Fonte dos dados dos personagens (API): hp-api.onrender.com ✨',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 20,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.normal,
+                    color: AppColors.brancoPadrao,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 5.0,
+                        color: Colors.black45,
+                        offset: Offset(2.0, 2.0),),]),),
+              const SizedBox(height: 60),
 
               _buildNavigationButton(
-                context, 'Ver Personagens', AppRoutes.charactersTimeline,),
-              const SizedBox(height: 20),
+                  context, 'Sobre Harry Potter', AppRoutes.history, Icons.menu_book, AppColors.marromClaro, Colors.white),
+              const SizedBox(height: 25),
 
               _buildNavigationButton(
-                context, 'Sobre Harry Potter', AppRoutes.history,),
-              const SizedBox(height: 20),
+                context, 'Explorar Personagens', AppRoutes.charactersTimeline, Icons.people_alt, AppColors.marromClaro, Colors.white),
+              const SizedBox(height: 25),
 
               _buildNavigationButton(
-                context, 'Dicionário', AppRoutes.dictionary,),
-              const SizedBox(height: 20),
+                context, 'Ler o Dicionário', AppRoutes.dictionary, Icons.electric_bolt, AppColors.marromClaro, Colors.white),
+              const SizedBox(height: 25),
 
               _buildNavigationButton(
-                context, 'Varinhas', AppRoutes.wands,),
+                context, 'Varinha Mágica', AppRoutes.wands, Icons.flare_sharp, AppColors.marromClaro, Colors.white),
               const SizedBox(height: 40),
 
               ElevatedButton.icon(
@@ -53,10 +76,7 @@ class MainScreen extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('A funcionalidade "Sair" geralmente é gerenciada pelo sistema operacional.'),
-                      duration: Duration(seconds: 3),
-                    ),
-                  );
-                },
+                      duration: Duration(seconds: 3),),);},
                 icon: const Icon(Icons.exit_to_app),
                 label: const Text('Sair do App'),
                 style: ElevatedButton.styleFrom(
@@ -69,6 +89,20 @@ class MainScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(height: 70),
+              const Text(
+                '✨ ',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 20,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.normal,
+                    color: AppColors.marromClaro,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 5.0,
+                        color: Colors.black45,
+                        offset: Offset(2.0, 2.0),),]),),
             ],
           ),
         ),
@@ -77,7 +111,13 @@ class MainScreen extends StatelessWidget {
   }
 
   // função dos botões de navegação
-  Widget _buildNavigationButton(BuildContext context, String text, String routeName) {
+  Widget _buildNavigationButton(
+      BuildContext context,
+      String text,
+      String routeName,
+      IconData iconData,
+      Color iconColor,
+      Color textColor,) {
     return ElevatedButton(
       onPressed: () {
         Navigator.pushNamed(context, routeName);
@@ -86,13 +126,20 @@ class MainScreen extends StatelessWidget {
         backgroundColor: AppColors.azulEscuro,
         foregroundColor: Colors.white,
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
-        textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
         elevation: 5,
       ),
-      child: Text(text),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(iconData, color: iconColor),
+          const SizedBox(width: 12),
+          Text(text, style: TextStyle(color: textColor)),
+        ],
+      ),
     );
   }
 }

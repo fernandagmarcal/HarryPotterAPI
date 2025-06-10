@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../ui/app_colors.dart';
 
 class LoadingScreen extends StatelessWidget {
   final String message;
@@ -8,20 +9,47 @@ class LoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Carregando...')),
+      backgroundColor: AppColors.backgroundColor,
+      appBar: AppBar(
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.hourglass_empty, color: AppColors.marromClaro),
+            const SizedBox(width: 8),
+            const Text(
+              'Carregando...',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+        centerTitle: true,
+        backgroundColor: AppColors.azulEscuro,
+        foregroundColor: Colors.white,
+        elevation: 4,
+        automaticallyImplyLeading: false,
+      ),
       body: Center(
         child: SingleChildScrollView(
-          // Envolvendo a Column com SingleChildScrollView
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CircularProgressIndicator(),
-              const SizedBox(height: 16),
+              CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.marromClaro),
+                strokeWidth: 5,
+              ),
+              const SizedBox(height: 24),
               Text(
                 message,
-                style: const TextStyle(fontSize: 16),
-                textAlign:
-                TextAlign.center, // Centraliza o texto horizontalmente
+                style: TextStyle(
+                  fontSize: 20,
+                  color: AppColors.brancoPadrao,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.center,
               ),
             ],
           ),
