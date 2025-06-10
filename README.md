@@ -1,9 +1,14 @@
+* [PT-BR](#portugues-brasil) <br>
+* [EN-US](#harry-potter-universe-app--flutter)
+
 # 💫 Universo Harry Potter App – Flutter
+#### Português - Brasil
   Este é um projeto de aplicativo desenvolvido em Flutter, inspirado na **magia de Hogwarts** e no **espírito da casa Corvinal 🦅**, desenvolvido com o objetivo de oferecer uma experiência sobre o universo de **Harry Potter**. Com foco nas melhores práticas de mobile, utilizando:
 - Consumo de API REST para obter dados dinâmicos;
 - Rotas nomeadas para uma navegação estruturada e eficiente;
 - Tratamento de Estados de API: (carregamento, sucesso e falha);
 - Responsividade, design adaptável;
+
 >
 > [!NOTE]
 > API pública utilizada: 🔗 [https://hp-api.onrender.com](https://hp-api.onrender.com) <br>
