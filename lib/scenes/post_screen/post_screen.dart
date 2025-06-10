@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rm_api/models/character.dart';
-import 'package:rm_api/ui/app_colors.dart';
+import 'package:hp_api/models/character.dart';
+import 'package:hp_api/ui/app_colors.dart';
 
 class PostScreen extends StatelessWidget {
   static const String routeName = '/post';
