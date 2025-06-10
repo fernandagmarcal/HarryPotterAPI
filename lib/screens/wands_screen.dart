@@ -95,9 +95,9 @@ class WandsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    '🪄 Varinhas no Mundo Mágico 🪄',
+                    'Varinhas no Mundo Mágico 🪄',
                     style: TextStyle(
-                      fontSize: 26,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: AppColors.marromClaro,
                     ),

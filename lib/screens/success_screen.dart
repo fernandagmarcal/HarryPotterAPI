@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../models/character.dart';
-import '../scenes/post_screen/post_screen.dart';
 import '../scenes/timeline_screen/timeline_screen.dart';
 import '../ui/app_colors.dart';
 import '../routes/app_routes.dart';
@@ -55,9 +54,9 @@ class _SuccessScreenState extends State<SuccessScreen> {
         _filteredCharacters = _originalCharacters.where((character) {
           // Filtra por nome, espécie, gênero ou casa (você pode adicionar mais campos)
           return character.name.toLowerCase().contains(query) ||
-              (character.species?.toLowerCase().contains(query) ?? false) ||
-              (character.gender?.toLowerCase().contains(query) ?? false) ||
-              (character.house?.toLowerCase().contains(query) ?? false);
+              (character.species.toLowerCase().contains(query)) ||
+              (character.gender.toLowerCase().contains(query)) ||
+              (character.house.toLowerCase().contains(query));
         }).toList();
       }
     });
@@ -110,7 +109,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Pesquisar personagem...',
-                hintStyle: TextStyle(color: AppColors.azulEscuro.withOpacity(0.6)),
+                hintStyle: TextStyle(color: AppColors.azulEscuro),
                 prefixIcon: Icon(Icons.search, color: AppColors.marromClaro),
                 suffixIcon: _searchController.text.isNotEmpty
                     ? IconButton(
@@ -196,7 +195,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      character.name ?? 'Nome Desconhecido',
+                      character.name,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 22,
@@ -211,13 +210,13 @@ class _SuccessScreenState extends State<SuccessScreen> {
                 ),
               ),
               const SizedBox(width: 16.0),
-              if (character.image != null && character.image!.isNotEmpty)
+              if (character.image.isNotEmpty)
                 Hero(
                   tag: 'character_image_${character.id}',
                   child: CircleAvatar(
                     radius: 40,
-                    backgroundColor: AppColors.marromClaro.withOpacity(0.2),
-                    backgroundImage: NetworkImage(character.image!),
+                    backgroundColor: AppColors.marromClaro,
+                    backgroundImage: NetworkImage(character.image),
                     onBackgroundImageError: (exception, stackTrace) {
                       debugPrint('Erro ao carregar imagem para ${character.name}: $exception');
                     },
@@ -226,7 +225,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
               else
                 CircleAvatar(
                   radius: 40,
-                  backgroundColor: AppColors.marromClaro.withOpacity(0.2),
+                  backgroundColor: AppColors.marromClaro,
                   child: Icon(Icons.person, size: 40, color: AppColors.marromClaro),
                 ),
             ],

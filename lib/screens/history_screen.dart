@@ -75,9 +75,9 @@ class HistoryScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                '💫 Uma Jornada Mágica 💫',
+                'Uma Jornada Mágica! 💫',
                 style: TextStyle(
-                  fontSize: 26,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: AppColors.marromClaro,
                 ),

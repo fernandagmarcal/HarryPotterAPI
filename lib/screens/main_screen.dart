@@ -33,12 +33,10 @@ class MainScreen extends StatelessWidget {
               ),
               const SizedBox(height: 60),
               const Text(
-                'Prepare-se para mergulhar no mundo bruxo!\nNeste app, você encontra um resumo encantador da história de Harry Potter,\n'
-                    'um dicionário com termos mágicos e um guia completo sobre varinhas.\n'
-                    'Também pode explorar detalhes dos personagens icônicos da saga!\n \n',
+                'Prepare-se para mergulhar no mundo bruxo!\nNeste app, você encontra um resumo encantador da história de Harry Potter, um dicionário com termos mágicos e um guia completo sobre varinhas. Também pode explorar detalhes dos personagens icônicos da saga!\n \n',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 18,
                   fontStyle: FontStyle.italic,
                   fontWeight: FontWeight.bold,
                   color: AppColors.marromClaro,
@@ -48,10 +46,10 @@ class MainScreen extends StatelessWidget {
                       color: Colors.black45,
                       offset: Offset(2.0, 2.0),),]),),
               const Text(
-                '✨ Fonte dos dados dos personagens (API): hp-api.onrender.com ✨',
+                '✨ (API): hp-api.onrender.com ✨',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.normal,
                     color: AppColors.brancoPadrao,
@@ -110,6 +108,7 @@ class MainScreen extends StatelessWidget {
                         blurRadius: 5.0,
                         color: Colors.black45,
                         offset: Offset(2.0, 2.0),),]),),
+              const SizedBox(height: 10),
             ],
           ),
         ),
