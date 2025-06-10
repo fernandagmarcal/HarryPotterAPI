@@ -25,6 +25,13 @@ class MainScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Image.asset(
+                'assets/images/harry-potter.png',
+                height: 250,
+                width: 180,
+                fit: BoxFit.contain, // Garante que a imagem se ajuste sem cortar
+              ),
+              const SizedBox(height: 60),
               const Text(
                 'Prepare-se para mergulhar no mundo bruxo!\nNeste app, você encontra um resumo encantador da história de Harry Potter,\n'
                     'um dicionário com termos mágicos e um guia completo sobre varinhas.\n'
@@ -91,13 +98,13 @@ class MainScreen extends StatelessWidget {
               ),
               const SizedBox(height: 70),
               const Text(
-                '✨ ',
+                'Mobile I: por Fernanda Galvão\n''Prof.: Silvano Malfatti',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 15,
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.normal,
-                    color: AppColors.marromClaro,
+                    color: AppColors.brancoPadrao,
                     shadows: [
                       Shadow(
                         blurRadius: 5.0,
