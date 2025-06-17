@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hp_api/widgets/telas_app_bar.dart';
 import '../routes/app_routes.dart';
 import '../ui/app_colors.dart';
 
@@ -138,13 +139,9 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
               fontWeight: FontWeight.bold,
               fontSize: 18,
               color: AppColors.azulEscuro,),),
-          const SizedBox(height: 4.0),
+          const SizedBox(height: 10),
           Text(
-            definition,
-            style: TextStyle(
-              fontSize: 15,
-              color: AppColors.azulEscuro,),
-            textAlign: TextAlign.left,),],),);
+            definition, style: TextStyle(fontSize: 15, color: AppColors.azulEscuro,), textAlign: TextAlign.left,),],),);
   }
 
   @override
@@ -152,25 +149,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
     final List<String> sortedLetters = _dictionaryData.keys.toList()..sort();
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: AppBar(
-        backgroundColor: AppColors.azulEscuro,
-        elevation: 4,
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.electric_bolt, color: AppColors.marromClaro), // Ícone de dicionário
-            const SizedBox(width: 8),
-            const Text(
-              'Dicionário Mágico',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.white,),),],),),
+      appBar: TelasAppBar(),
       body: Column(
         children: [
           // Conteúdo Principal: Lista Expansível
@@ -185,9 +164,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
               children: sortedLetters.map((letter) {
                 final terms = _dictionaryData[letter]!; // Obter termos para a letra
                 return Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
-                  elevation: 4,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                  margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0), elevation: 6, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                   child: Theme( // Tema para estilizar ExpansionTile
                     data: Theme.of(context).copyWith(
                       dividerColor: Colors.transparent,
@@ -210,18 +187,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                         return Column(
                           children: [
                             Divider(height: 1, color: AppColors.marromClaro), // Divisor entre termos
-                            _buildDictionaryItem(word, definition),
-                          ],
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-        ],
-      ),
+                            _buildDictionaryItem(word, definition),],);}).toList(),),),);}).toList(),),),],),
     );
   }
 }

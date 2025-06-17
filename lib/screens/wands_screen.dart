@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hp_api/widgets/telas_app_bar.dart';
 import '../routes/app_routes.dart';
 import '../ui/app_colors.dart';
 
@@ -27,64 +28,24 @@ class WandsScreen extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 12),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.azulPrincipal,
+        color: AppColors.brancoPadrao,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.azulPrincipal, width: 1.5),
+        border: Border.all(color: AppColors.brancoPadrao, width: 1.5),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            title,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: AppColors.marromClaro,
-            ),
-          ),
+            title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.marromClaro,),),
           const SizedBox(height: 8),
-          ...content,
-        ],
-      ),
-    );
+          ...content,],),);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: AppBar(
-        backgroundColor: AppColors.azulPrincipal,
-        elevation: 4,
-        centerTitle: true,
-        // title: const Text(
-        //   'Varinhas Mágicas',
-        //   style: TextStyle(
-        //     fontWeight: FontWeight.bold,
-        //     fontSize: 20,
-        //     color: AppColors.marromClaro,
-        //   ),
-        // ),
-        title: Row( // Usamos uma Row para colocar o ícone e o texto lado a lado
-          mainAxisSize: MainAxisSize.min, // Ocupa o mínimo de espaço horizontal necessário
-          children: [
-            Icon(Icons.flare_sharp, color: AppColors.marromClaro), // O ÍCONE
-            const SizedBox(width: 8), // Espaço entre o ícone e o texto
-            const Text(
-              'Varinhas Mágicas',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: AppColors.brancoPadrao, // Cor do texto do título
-              ),
-            ),
-          ],
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
+      appBar: TelasAppBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -94,24 +55,23 @@ class WandsScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    'Varinhas no Mundo Mágico 🪄',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.marromClaro,
-                    ),
-                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.flare, color: AppColors.marromClaro),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Varinhas Mágicas',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontFamily: 'InterRegular',
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.marromClaro,),),],),
                   const SizedBox(height: 12),
                   Text(
                     'No mundo de Harry Potter, cada bruxo possui uma varinha única — quase como uma extensão de sua alma. Feitas com diferentes madeiras, núcleos mágicos e tamanhos, as varinhas influenciam diretamente o estilo e a força do bruxo.',
-                    style: TextStyle(fontSize: 18, color: AppColors.brancoPadrao),
-                    textAlign: TextAlign.justify,
-                  ),
-                ],
-              ),
-            ),
-
+                    style: TextStyle(fontSize: 18, color: AppColors.brancoPadrao, fontFamily: 'InterRegular', fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.justify,),],),),
             const SizedBox(height: 20),
 
             // Tipos de madeira
@@ -121,12 +81,12 @@ class WandsScreen extends StatelessWidget {
                 content: [
                   Text(
                     'A madeira influencia o temperamento da varinha. Exemplos:',
-                    style: TextStyle(fontSize: 18, color: AppColors.brancoPadrao),
+                    style: TextStyle(fontSize: 18, color: AppColors.azulPrincipal, fontFamily: 'InterRegular', fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
-                  Text('• Azevinho — ideal para bruxos em jornadas difíceis.', style: TextStyle(fontSize: 18, color: AppColors.brancoPadrao)),
-                  Text('• Carvalho — poderosa e leal.', style: TextStyle(fontSize: 18, color: AppColors.brancoPadrao)),
-                  Text('• Teixo — associada a bruxos de grande poder.', style: TextStyle(fontSize: 18, color: AppColors.brancoPadrao)),
+                  Text('• Azevinho — ideal para bruxos em jornadas difíceis.', style: TextStyle(fontSize: 18,  fontFamily: 'InterRegular', fontWeight: FontWeight.bold,color: AppColors.azulPrincipal)),
+                  Text('• Carvalho — poderosa e leal.', style: TextStyle(fontSize: 18, color: AppColors.azulPrincipal, fontFamily: 'InterRegular', fontWeight: FontWeight.bold)),
+                  Text('• Teixo — associada a bruxos de grande poder.', style: TextStyle(fontSize: 18, color: AppColors.azulPrincipal, fontFamily: 'InterRegular', fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
@@ -138,15 +98,11 @@ class WandsScreen extends StatelessWidget {
                 content: [
                   Text(
                     'O núcleo é o "coração" da varinha. Os mais comuns são:',
-                    style: TextStyle(fontSize: 18, color: AppColors.brancoPadrao),
-                  ),
+                    style: TextStyle(fontSize: 18, fontFamily: 'InterRegular', fontWeight: FontWeight.bold, color: AppColors.azulPrincipal),),
                   const SizedBox(height: 8),
-                  Text('• Pena de fênix — rara, poderosa e imprevisível.', style: TextStyle(fontSize: 18, color: AppColors.brancoPadrao)),
-                  Text('• Corda de coração de dragão — potente e intensa.', style: TextStyle(fontSize: 18, color: AppColors.brancoPadrao)),
-                  Text('• Pelo de unicórnio — leal, estável e confiável.', style: TextStyle(fontSize: 18, color: AppColors.brancoPadrao)),
-                ],
-              ),
-            ),
+                  Text('• Pena de fênix — rara, poderosa e imprevisível.', style: TextStyle(fontSize: 18, color: AppColors.azulPrincipal, fontFamily: 'InterRegular', fontWeight: FontWeight.bold)),
+                  Text('• Corda de coração de dragão — potente e intensa.', style: TextStyle(fontSize: 18, color: AppColors.azulPrincipal,fontFamily: 'InterRegular', fontWeight: FontWeight.bold)),
+                  Text('• Pelo de unicórnio — leal, estável e confiável.', style: TextStyle(fontSize: 18, color: AppColors.azulPrincipal, fontFamily: 'InterRegular', fontWeight: FontWeight.bold)),],),),
 
             // Tamanho e flexibilidade
             buildWrappedSection(
@@ -155,18 +111,11 @@ class WandsScreen extends StatelessWidget {
                 content: [
                   Text(
                     'As varinhas variam entre cerca de 9 e 15 polegadas, e seu comprimento está ligado ao estilo pessoal e à presença física ou mágica do bruxo. Varinhas mais curtas tendem a funcionar bem com usuários diretos e focados, enquanto varinhas mais longas são geralmente associadas a bruxos ousados ou com propósitos grandiosos.',
-                    style: TextStyle(fontSize: 18, color: AppColors.brancoPadrao),
-                    textAlign: TextAlign.justify,
-                  ),
+                    style: TextStyle(fontSize: 18, fontFamily: 'InterRegular', fontWeight: FontWeight.bold, color: AppColors.azulPrincipal), textAlign: TextAlign.justify,),
                   const SizedBox(height: 12),
                   Text(
                     'Apesar disso, não existe um tipo “melhor”: a combinação perfeita depende da personalidade, intenções e da conexão mágica entre bruxo e varinha.',
-                    style: TextStyle(fontSize: 18, color: AppColors.brancoPadrao),
-                    textAlign: TextAlign.justify,
-                  ),
-                ],
-              ),
-            ),
+                    style: TextStyle(fontSize: 18, fontFamily: 'InterRegular', fontWeight: FontWeight.bold,  color: AppColors.azulPrincipal), textAlign: TextAlign.justify,),],),),
 
             // Lealdade
             buildWrappedSection(
@@ -175,32 +124,21 @@ class WandsScreen extends StatelessWidget {
                 content: [
                   Text(
                     '“A varinha escolhe o bruxo — e não o contrário.”',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: AppColors.brancoPadrao,
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
+                    style: TextStyle(fontSize: 18, fontFamily: 'InterRegular', fontWeight: FontWeight.bold, color: AppColors.azulPrincipal, fontStyle: FontStyle.italic,),),
                   Text(
                     '— Sr. Ollivander, Harry Potter e a Pedra Filosofal',
-                    style: TextStyle(fontSize: 16, color: AppColors.brancoPadrao),
-                  ),
+                    style: TextStyle(fontSize: 16,fontFamily: 'InterRegular', fontWeight: FontWeight.bold,  color: AppColors.azulPrincipal),),
                   const SizedBox(height: 8),
                   Text(
                     'Mesmo que você conquiste outra varinha, ela raramente funcionará tão bem se não tiver lealdade a você.',
-                    style: TextStyle(fontSize: 18, color: AppColors.brancoPadrao),
-                    textAlign: TextAlign.justify,
-                  ),
-                ],
-              ),
-            ),
+                    style: TextStyle(fontSize: 18,fontFamily: 'InterRegular', fontWeight: FontWeight.bold,  color: AppColors.azulPrincipal), textAlign: TextAlign.justify,),],),),
             const Text(
               '✨ ',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 20,
                   fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.normal,
+                  fontFamily: 'InterRegular', fontWeight: FontWeight.bold,
                   color: AppColors.marromClaro,
                   shadows: [
                     Shadow(
@@ -213,8 +151,8 @@ class WandsScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,
+                fontFamily: 'InterRegular', fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.normal,
                 color: AppColors.azulClaro,),),
           ],
         ),

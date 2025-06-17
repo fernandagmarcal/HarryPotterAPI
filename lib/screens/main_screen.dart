@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../routes/app_routes.dart';
+import '../widgets/home_app_bar.dart';
 import '../ui/app_colors.dart';
 
 class MainScreen extends StatelessWidget {
@@ -9,15 +10,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: AppBar(
-        title: const Text('Bem-vindo ao Universo de Harry Potter!',
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: AppColors.marromClaro,),),
-        centerTitle: true,
-        backgroundColor: AppColors.azulPrincipal,
-        foregroundColor: AppColors.marromClaro,),
+      appBar: HomeAppBar(),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
@@ -25,19 +18,39 @@ class MainScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+            const Text(
+            'Seja bem-vindo!',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.marromClaro,
+              fontFamily: 'InterRegular',
+              fontSize: 24,
+              fontWeight: FontWeight.w800,)),
+              const SizedBox(height: 5),
+              const Text(
+                'Prepare-se para mergulhar no mundo bruxo.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'InterRegular',
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.brancoPadrao,),),
+              const SizedBox(height: 25),
               Image.asset(
-                'assets/images/harry-potter.png',
+                'assets/images/logohome.png',
                 height: 250,
                 width: 180,
                 fit: BoxFit.contain, // Garante que a imagem se ajuste sem cortar
               ),
-              const SizedBox(height: 60),
+              const SizedBox(height: 30),
               const Text(
-                'Prepare-se para mergulhar no mundo bruxo!\nNeste app, você encontra um resumo encantador da história de Harry Potter, um dicionário com termos mágicos e um guia completo sobre varinhas. Também pode explorar detalhes dos personagens icônicos da saga!\n \n',
+                'Neste app, você encontra um resumo encantador da história de Harry Potter, um dicionário com termos mágicos e um guia completo sobre varinhas. Também pode explorar detalhes dos personagens e feitiços mais icônicos da saga!\n \n',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
-                  fontStyle: FontStyle.italic,
+                  fontFamily: 'InterRegular',
+                  fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.bold,
                   color: AppColors.marromClaro,
                   shadows: [
@@ -46,12 +59,13 @@ class MainScreen extends StatelessWidget {
                       color: Colors.black45,
                       offset: Offset(2.0, 2.0),),]),),
               const Text(
-                '✨ (API): hp-api.onrender.com ✨',
+                '✨ Créditos (API): hp-api.onrender.com ✨',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 18,
+                    fontFamily: 'InterRegular',
                     fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.bold,
                     color: AppColors.brancoPadrao,
                     shadows: [
                       Shadow(
@@ -69,11 +83,11 @@ class MainScreen extends StatelessWidget {
               const SizedBox(height: 25),
 
               _buildNavigationButton(
-                context, 'Ler o Dicionário', AppRoutes.dictionary, Icons.electric_bolt, AppColors.marromClaro, Colors.white),
+                context, 'Dicionário Mágico', AppRoutes.dictionary, Icons.electric_bolt, AppColors.marromClaro, Colors.white),
               const SizedBox(height: 25),
 
               _buildNavigationButton(
-                context, 'Varinha Mágica', AppRoutes.wands, Icons.flare_sharp, AppColors.marromClaro, Colors.white),
+                context, 'Varinhas Mágicas', AppRoutes.wands, Icons.flare, AppColors.marromClaro, Colors.white),
               const SizedBox(height: 40),
 
               ElevatedButton.icon(
@@ -88,7 +102,7 @@ class MainScreen extends StatelessWidget {
                   backgroundColor: AppColors.azulClaro,
                   foregroundColor: AppColors.azulEscuro,
                   padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
-                  textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  textStyle: const TextStyle(fontSize: 18, fontFamily: 'InterRegular', fontWeight: FontWeight.bold),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -100,6 +114,7 @@ class MainScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 15,
+                    fontFamily: 'InterRegular',
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.normal,
                     color: AppColors.brancoPadrao,
@@ -132,7 +147,7 @@ class MainScreen extends StatelessWidget {
         backgroundColor: AppColors.azulEscuro,
         foregroundColor: Colors.white,
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
-        textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        textStyle: const TextStyle(fontSize: 20, fontFamily: 'InterRegular', fontWeight: FontWeight.w800),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),

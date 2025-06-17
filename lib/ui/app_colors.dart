@@ -14,4 +14,10 @@ abstract class AppColors {
   static const Color marromClarinho = Color(0xFFE3C2B2); // Pêssego/bege claro
   static const Color begeClaro = Color(0xFFECE1D0);   // Bege muito claro/creme
   static const Color brancoPadrao = Color(0xFFFFFFFF); // Branco puro
+
+  // Cores das Casas de Hogwarts
+  static const Color grifinoriaColor = Color(0xFFDC2626); // Vermelho Grifinória
+  static const Color lufaColorr = Color(0xFFEEB804); // Dourado Grifinória
+  static const Color sonserinaColor = Color(0xFF16A34A); // Verde Sonserina
+  static const Color corvinalColor = Color(0xFF2563E7); // Azul Corvinal
 }

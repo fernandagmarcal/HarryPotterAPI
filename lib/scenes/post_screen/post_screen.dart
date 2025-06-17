@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hp_api/models/character.dart';
 import 'package:hp_api/ui/app_colors.dart';
+import 'package:hp_api/widgets/telas_app_bar.dart';
 
 class PostScreen extends StatelessWidget {
   static const String routeName = '/post';
@@ -17,118 +18,102 @@ class PostScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text(
             'Erro: Detalhes do Personagem',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: Colors.white,),),
+            style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'InterRegular', fontSize: 20, color: Colors.white,),),
           centerTitle: true,
           backgroundColor: AppColors.azulEscuro,
           foregroundColor: Colors.white,
           elevation: 4,
           automaticallyImplyLeading: false,),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.sentiment_dissatisfied,
-                size: 100,
-                color: Colors.red[700],),
+              Icon(Icons.sentiment_dissatisfied, size: 100, color: Colors.red[700],),
               const SizedBox(height: 16),
-              Text(
-                'Nenhum personagem selecionado ou dados inválidos.',
+              Text('Nenhum personagem selecionado ou dados inválidos.',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18, color: Colors.red[800]),),],),),);
-    }
+                style: TextStyle(fontSize: 18, fontFamily: 'InterRegular', fontWeight: FontWeight.bold, color: Colors.red[800]),),],),),);}
 
-    // detalhes do personagem
+    // Detalhes do personagem
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: AppBar(
-        backgroundColor: AppColors.azulEscuro,
-        elevation: 4,
-        centerTitle: true,
-        foregroundColor: Colors.white,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);},),
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.person, color: AppColors.marromClaro),
-            const SizedBox(width: 8),
-            Text(
-              'Detalhes de ${character.name ?? 'Personagem'}',
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.white,),),],),),
+      appBar: const TelasAppBar(), // Usando sua AppBar customizada
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Imagem do Personagem (com Hero animation e loading/error builders)
-            if (character.image != null && character.image!.isNotEmpty)
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
-                  child: Hero( // <<< Widget Hero para animação de transição
-                    tag: 'character_image_${character.id}',
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Image.network(
-                        character.image!,
-                        height: MediaQuery.of(context).size.height * 0.45,
-                        width: MediaQuery.of(context).size.width * 0.6,
-                        fit: BoxFit.cover,
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return Center(
-                            child: CircularProgressIndicator(
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                                  : null,
-                              color: AppColors.marromClaro,),);},
-                        errorBuilder: (context, error, stackTrace) =>
-                            Icon(Icons.broken_image, size: 100, color: AppColors.marromClaro),),),),),),
+            // foto do personagem
+            Card(color: AppColors.brancoPadrao, elevation: 6, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0),),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Imagem do Personagem (com Hero animation e loading/error builders)
+                    if (character.image != null && character.image!.isNotEmpty)
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 20.0),
+                          child: Hero(
+                            tag: 'character_image_${character.id}',
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Image.network(
+                                character.image!,
+                                height: MediaQuery.of(context).size.height * 0.45, // Reduzi um pouco a altura para acomodar o card
+                                width: MediaQuery.of(context).size.width * 0.50,
+                                fit: BoxFit.cover, loadingBuilder: (context, child, loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      value: loadingProgress.expectedTotalBytes != null
+                                          ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes!
+                                          : null,
+                                      color: AppColors.marromClaro,),);},
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Icon(Icons.broken_image, size: 100, color: AppColors.marromClaro),),),),),),
+                    Text(
+                      'Conheça ${character.name ?? 'Personagem'}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 26, fontFamily: 'InterRegular', fontWeight: FontWeight.bold, color: AppColors.azulPrincipal),),],),),),
+            const SizedBox(height: 20), // Espaço entre os cards
 
-            const SizedBox(height: 10),
-            Text(
-              '💫 Detalhes de ${character.name ?? 'Personagem'}',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.marromClaro),
-            ),
-            Divider(color: AppColors.marromClaro, thickness: 1.5, height: 30), // Linha divisória temática
-
-            // Detalhes principais do personagem usando helper com ícones
-            _buildDetailRow('Espécie', character.species, Icons.psychology),
-            _buildDetailRow('Gênero', character.gender, Icons.person_outline),
-            _buildDetailRow('Casa', character.house, Icons.castle),
-            _buildDetailRow('Nascimento', character.dateOfBirth, Icons.cake),
-            _buildDetailRow('Ancestralidade', character.ancestry, Icons.family_restroom),
-            _buildDetailRow('Patronus', character.patronus, Icons.flare_sharp),
-            _buildBooleanDetailRow('Mago', character.wizard, Icons.auto_awesome),
-            _buildBooleanDetailRow('Estudante de Hogwarts', character.hogwartsStudent, Icons.school),
-            _buildBooleanDetailRow('Membro da Staff', character.hogwartsStaff, Icons.work),
-
-            // Informações da varinha, se existirem
-            if (character.wand != null && (character.wand!.wood != null || character.wand!.core != null || character.wand!.length != null))
-              Padding(
-                padding: const EdgeInsets.only(top: 25.0),
+            // card infos
+            Card(color: AppColors.brancoPadrao, elevation: 6,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0),),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      '🪄 Detalhes da Varinha:',
-                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.marromClaro),
-                    ),
-                    Divider(color: AppColors.marromClaro, thickness: 1, height: 20),
-                    _buildDetailRow('Madeira', character.wand!.wood, Icons.nature),
-                    _buildDetailRow('Núcleo', character.wand!.core, Icons.star_border),
-                    _buildDetailRow('Comprimento', character.wand!.length?.toString(), Icons.straighten),],),),],),
-      ),
-    );
+                    Text('Informações Principais',
+                      style: TextStyle(fontSize: 24, fontFamily: 'InterRegular', fontWeight: FontWeight.bold, color: AppColors.marromClaro),),
+                    Divider(color: AppColors.marromClaro, thickness: 1.5, height: 30),
+                    _buildDetailRow('Espécie', character.species, Icons.animation),
+                    _buildDetailRow('Gênero', character.gender, Icons.person),
+                    _buildDetailRow('Casa', character.house, Icons.castle),
+                    _buildDetailRow('Nascimento', character.dateOfBirth, Icons.cake),
+                    _buildDetailRow('Ancestralidade', character.ancestry, Icons.family_restroom),
+                    _buildDetailRow('Patronus', character.patronus, Icons.flare_sharp),
+                    _buildBooleanDetailRow('Mago', character.wizard, Icons.auto_awesome),
+                    _buildBooleanDetailRow('Estudante de Hogwarts', character.hogwartsStudent, Icons.school),
+                    _buildBooleanDetailRow('Membro da Staff', character.hogwartsStaff, Icons.stars),],),),),
+            const SizedBox(height: 20),
+
+            // card varinha
+            if (character.wand != null && (character.wand!.wood != null || character.wand!.core != null || character.wand!.length != null))
+              Card(color: AppColors.brancoPadrao, elevation: 6, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0),),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Detalhes da Varinha Mágica',
+                        style: TextStyle(fontSize: 24, fontFamily: 'InterRegular', fontWeight: FontWeight.bold, color: AppColors.marromClaro),),
+                      Divider(color: AppColors.marromClaro, thickness: 1, height: 20),
+                      _buildDetailRow('Madeira', character.wand!.wood, Icons.park),
+                      _buildDetailRow('Núcleo', character.wand!.core, Icons.center_focus_strong),
+                      _buildDetailRow('Comprimento', character.wand!.length?.toString(), Icons.straighten),],),),),
+            const SizedBox(height: 20),],),),);
   }
 
   // Helper para construir linhas de detalhes (String) com ícone
@@ -138,16 +123,15 @@ class PostScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
         children: [
-          Icon(icon, size: 20, color: AppColors.marromClaro), // Ícone
+          Icon(icon, size: 20, color: AppColors.marromClaro),
           const SizedBox(width: 10), // Espaço
-          Expanded( // Para que o texto não ultrapasse a largura
+          Expanded(
             child: RichText(
               text: TextSpan(
-                style: TextStyle(fontSize: 20, color: AppColors.brancoPadrao), // Cor do texto
+                style: TextStyle(fontSize: 20, color: AppColors.azulPrincipal),
                 children: [
-                  TextSpan(text: '$label: ', style: const TextStyle(fontWeight: FontWeight.bold)),
-                  TextSpan(text: value),],),),),],),);
-  }
+                  TextSpan(text: '$label: ', style: const TextStyle(fontFamily: 'InterRegular', fontWeight: FontWeight.bold)),
+                  TextSpan(text: value),],),),),],),);}
 
   // Helper para construir linhas de detalhes (Boolean) com ícone
   Widget _buildBooleanDetailRow(String label, bool? value, IconData icon) {
@@ -156,11 +140,10 @@ class PostScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
         children: [
-          Icon(icon, size: 20, color: AppColors.marromClaro), // Ícone
-          const SizedBox(width: 10), // Espaço
+          Icon(icon, size: 20, color: AppColors.marromClaro),
+          const SizedBox(width: 10),
           RichText(
-            text: TextSpan(
-              style: TextStyle(fontSize: 20, color: AppColors.brancoPadrao),
+            text: TextSpan(style: TextStyle(fontSize: 20, fontFamily: 'InterRegular', color: AppColors.azulPrincipal),
               children: [
                 TextSpan(text: '$label: ', style: const TextStyle(fontWeight: FontWeight.bold)),
                 TextSpan(text: value ? 'Sim' : 'Não'),],),),],),);

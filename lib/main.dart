@@ -11,11 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Universo Harry Potter', // Um título mais genérico e adequado para o app
-      theme: ThemeData(primarySwatch: Colors.blue),
-      // rota inicial
-      initialRoute: AppRoutes.home,
-      // mapa de rotas
+      title: 'Universo Harry Potter',
+      theme: ThemeData(primarySwatch: Colors.blue), // rota inicial
+      initialRoute: AppRoutes.home, // mapa de rotas
       routes: AppRoutes.routes,
     );
   }

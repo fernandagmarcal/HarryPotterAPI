@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hp_api/widgets/api_app_bar.dart';
 import '../models/character.dart';
 import '../scenes/timeline_screen/timeline_screen.dart';
 import '../ui/app_colors.dart';
@@ -52,7 +53,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
         _filteredCharacters = _originalCharacters; // Se a pesquisa estiver vazia, mostra todos
       } else {
         _filteredCharacters = _originalCharacters.where((character) {
-          // Filtra por nome, espécie, gênero ou casa (você pode adicionar mais campos)
+          // Filtra por nome, espécie, gênero ou casa
           return character.name.toLowerCase().contains(query) ||
               (character.species.toLowerCase().contains(query)) ||
               (character.gender.toLowerCase().contains(query)) ||
@@ -66,41 +67,8 @@ class _SuccessScreenState extends State<SuccessScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: AppBar(
-        backgroundColor: AppColors.azulEscuro,
-        elevation: 4,
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.people_alt, color: AppColors.marromClaro),
-            const SizedBox(width: 8),
-            Text(
-              widget.messageTitle, // Usar widget.messageTitle
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.white,),),],),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.refresh, color: Colors.white),
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const TimelineScreen()),
-              );
-            },
-          ),
-        ],
-      ),
-      // Corpo da tela: Coluna para barra de pesquisa e lista de personagens
-      body: Column( // Alterar de Center para Column para empilhar os widgets
+      appBar: ApiAppBar(),
+      body: Column(
         children: [
           // Barra de Pesquisa (TextField)
           Padding(
@@ -109,7 +77,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Pesquisar personagem...',
-                hintStyle: TextStyle(color: AppColors.azulEscuro),
+                hintStyle: TextStyle(color: AppColors.azulEscuro, fontFamily: 'InterRegular', fontWeight: FontWeight.normal,),
                 prefixIcon: Icon(Icons.search, color: AppColors.marromClaro),
                 suffixIcon: _searchController.text.isNotEmpty
                     ? IconButton(
@@ -117,9 +85,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
                   onPressed: () {
                     _searchController.clear(); // Limpa o texto
                     _filterCharacters(); // E re-filtra (mostra todos)
-                    FocusScope.of(context).unfocus(); // Fecha o teclado
-                  },
-                )
+                    FocusScope.of(context).unfocus();},)
                     : null,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
@@ -133,15 +99,11 @@ class _SuccessScreenState extends State<SuccessScreen> {
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(color: AppColors.azulEscuro, width: 2.5),
                 ),
-                filled: true,
-                fillColor: Colors.white, // Fundo branco para a barra de pesquisa
-                contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+                filled: true, fillColor: Colors.white, contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
               ),
-              style: TextStyle(color: AppColors.azulEscuro, fontSize: 16.0),
-              cursorColor: AppColors.azulEscuro,
-            ),
-          ),
-          // Lista de Personagens Filtrada (Expandida para preencher o resto do espaço)
+              style: TextStyle(color: AppColors.azulEscuro, fontSize: 16.0,fontFamily: 'InterRegular'),
+              cursorColor: AppColors.azulEscuro,),),
+          // lista de personagens expandida
           Expanded( // O Expanded é crucial para que o ListView.builder ocupe o espaço restante
             child: _filteredCharacters.isEmpty
                 ? Center(
@@ -149,41 +111,22 @@ class _SuccessScreenState extends State<SuccessScreen> {
                 _searchController.text.isEmpty
                     ? 'Nenhum personagem encontrado.' // Quando a lista original está vazia
                     : 'Nenhum resultado para "${_searchController.text}".', // Quando a pesquisa não encontra
-                style: TextStyle(
-                  fontSize: 18,
-                  color: AppColors.azulEscuro,
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            )
+                style: TextStyle(fontSize: 18, fontFamily: 'InterRegular', color: AppColors.azulEscuro, fontWeight: FontWeight.w500,), textAlign: TextAlign.center,),)
                 : ListView.builder(
               itemCount: _filteredCharacters.length,
               itemBuilder: (context, index) {
                 final character = _filteredCharacters[index]; // Usar a lista filtrada
-                return _buildCharacterItem(context, character);
-              },
-            ),
-          ),
-        ],
-      ),
-    );
+                return _buildCharacterItem(context, character);},),),],),);
   }
 
-  // Função para construir o item do personagem (Card) - Permanece a mesma
+  // card personagem
   Widget _buildCharacterItem(BuildContext context, Character character) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       elevation: 6,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            AppRoutes.characterDetail,
-            arguments: character,
-          );
-        },
+        onTap: () {Navigator.pushNamed(context, AppRoutes.characterDetail, arguments: character,);},
         borderRadius: BorderRadius.circular(12.0),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -196,14 +139,9 @@ class _SuccessScreenState extends State<SuccessScreen> {
                   children: [
                     Text(
                       character.name,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22,
-                        color: AppColors.azulEscuro,
-                      ),
-                    ),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'InterRegular', fontSize: 22, color: AppColors.azulEscuro,),),
                     const SizedBox(height: 10.0),
-                    _buildInfoRow('Espécie', character.species, Icons.psychology),
+                    _buildInfoRow('Espécie', character.species, Icons.animation),
                     _buildInfoRow('Gênero', character.gender, Icons.person),
                     _buildInfoRow('Casa', character.house, Icons.castle),
                   ],
@@ -226,18 +164,56 @@ class _SuccessScreenState extends State<SuccessScreen> {
                 CircleAvatar(
                   radius: 40,
                   backgroundColor: AppColors.marromClaro,
-                  child: Icon(Icons.person, size: 40, color: AppColors.marromClaro),
-                ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+                  child: Icon(Icons.person, size: 40, color: AppColors.marromClaro),),],),),),);}
 
   // Helper para exibir informações de forma consistente
   Widget _buildInfoRow(String label, String? value, IconData icon) {
     if (value == null || value.isEmpty) return const SizedBox.shrink();
+
+    // CORES POR CASA
+    if (label == 'Casa') {
+      Color backgroundColor;
+      Color textColor;
+      final normalizedHouse = value.toLowerCase().trim();
+      switch (normalizedHouse) {
+        case 'gryffindor':
+          backgroundColor = AppColors.grifinoriaColor;
+          textColor = AppColors.brancoPadrao;
+          break;
+        case 'slytherin':
+          backgroundColor = AppColors.sonserinaColor;
+          textColor = AppColors.brancoPadrao;
+          break;
+        case 'ravenclaw':
+          backgroundColor = AppColors.corvinalColor;
+          textColor = AppColors.brancoPadrao;
+          break;
+        case 'hufflepuff':
+          backgroundColor = AppColors.lufaColorr;
+          textColor = AppColors.brancoPadrao;
+          break;
+        default:
+          backgroundColor =
+              AppColors.azulEscuro;
+          textColor = Colors.white;
+      }
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 2.0),
+        child: Row(
+          children: [
+            Icon(icon, size: 18, color: AppColors.marromClaro),
+            const SizedBox(width: 8),
+            Text(
+              'Casa: ', style: TextStyle(fontSize: 16, color: AppColors.azulEscuro, fontFamily: 'InterRegular', fontWeight: FontWeight.bold),),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              decoration: BoxDecoration(
+                color: backgroundColor,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: textColor, width: 1),),
+              child: Text(value, style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 14,),),),],),);
+    }
+    // Comportamento padrão
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2.0),
       child: Row(
@@ -247,11 +223,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
           Expanded(
             child: Text(
               '$label: ${value.trim()}',
-              style: TextStyle(fontSize: 16, color: AppColors.azulEscuro),
-            ),
-          ),
-        ],
-      ),
-    );
+              style: TextStyle(fontSize: 16, color: AppColors.azulEscuro,  fontFamily: 'InterRegular',fontWeight: FontWeight.bold),),),
+        ],),);
   }
 }
