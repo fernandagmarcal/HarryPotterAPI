@@ -72,7 +72,19 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/images/harry-potter.png
+    - assets/images/
+    - assets/fonts/
+  fonts:
+    - family: InterRegular
+      fonts:
+        - asset: assets/fonts/Inter_18pt-Regular.ttf
+          weight: 100
+        - asset: assets/fonts/Inter_18pt-SemiBold.ttf
+          weight: 400
+        - asset: assets/fonts/Inter_18pt-Bold.ttf
+          weight: 500
+        - asset: assets/fonts/Inter_18pt-ExtraBold.ttf
+          weight: 800
 
   # To add assets to your application, add an assets section, like this:
   # assets:
